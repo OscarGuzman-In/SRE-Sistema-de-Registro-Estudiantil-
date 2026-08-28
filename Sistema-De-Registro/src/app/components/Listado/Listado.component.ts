@@ -16,16 +16,31 @@ export class ListadoComponent {
   @Output() eliminar = new EventEmitter<string>(); // Usamos numeroCarne como identificador único
 
   filtroBusqueda: string = '';
+  ordenAscendente: boolean = true;
 
   get estudiantesFiltrados(): Student[] {
-    if (!this.filtroBusqueda.trim()) {
-      return this.estudiantes;
+    let resultado = this.estudiantes;
+
+    if (this.filtroBusqueda.trim()) {
+      const texto = this.filtroBusqueda.toLowerCase().trim();
+      resultado = resultado.filter(e =>
+        e.nombreCompleto.toLowerCase().includes(texto) ||
+        e.numeroCarne.toLowerCase().includes(texto)
+      );
     }
-    const texto = this.filtroBusqueda.toLowerCase().trim();
-    return this.estudiantes.filter(e => 
-      e.nombreCompleto.toLowerCase().includes(texto) ||
-      e.numeroCarne.toLowerCase().includes(texto)
-    );
+
+    return [...resultado].sort((a, b) => {
+      const comparacion = a.nombreCompleto.localeCompare(b.nombreCompleto);
+      return this.ordenAscendente ? comparacion : -comparacion;
+    });
+  }
+
+  get totalResultados(): number {
+    return this.estudiantesFiltrados.length;
+  }
+
+  toggleOrden(): void {
+    this.ordenAscendente = !this.ordenAscendente;
   }
 
   onEditar(estudiante: Student): void {
