@@ -1,11 +1,13 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
+import { FormularioComponent } from './feature/formulario/formulario.component';
 
 @Component({
   selector: 'app-root',
+  standalone: true,
+  imports: [FormularioComponent],
   templateUrl: './app.component.html',
-  standalone: false,
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
-export class App {
-  protected readonly title = signal('Sistema-De-Registro');
+export class AppComponent {
+  title = 'Sistema-De-Registro';
 }

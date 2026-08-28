@@ -1,0 +1,100 @@
+<div class="card p-3 mb-4">
+  <h3>{{ estudianteEditar ? 'Editar Estudiante' : 'Registro de Estudiante' }}</h3>
+  
+  <form [formGroup]="estudianteForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="nombreCompleto" class="form-label">Nombre completo</label>
+      <input type="text" id="nombreCompleto" formControlName="nombreCompleto" class="form-control">
+      <div *ngIf="isInvalidField('nombreCompleto')" class="text-danger small">
+        El nombre es obligatorio y debe tener al menos 5 caracteres.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="carnet" class="form-label">Número de carné</label>
+      <input type="text" id="carnet" formControlName="carnet" class="form-control">
+      <div *ngIf="isInvalidField('carnet')" class="text-danger small">
+        El carné es obligatorio y debe tener entre 5 y 10 caracteres.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="correo" class="form-label">Correo electrónico</label>
+      <input type="email" id="correo" formControlName="correo" class="form-control">
+      <div *ngIf="isInvalidField('correo')" class="text-danger small">
+        Ingrese un correo electrónico válido.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="edad" class="form-label">Edad</label>
+      <input type="number" id="edad" formControlName="edad" class="form-control">
+      <div *ngIf="isInvalidField('edad')" class="text-danger small">
+        La edad debe estar entre 14 y 25 años.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="carrera" class="form-label">Carrera</label>
+      <select id="carrera" formControlName="carrera" class="form-select">
+        <option value="">-- Seleccionar --</option>
+        <option value="Informática">Informática</option>
+        <option value="Administración">Administración</option>
+        <option value="Diseño">Diseño</option>
+        <option value="Electrónica">Electrónica</option>
+        <option value="Contabilidad">Contabilidad</option>
+      </select>
+      <div *ngIf="isInvalidField('carrera')" class="text-danger small">
+        Debe seleccionar una carrera.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label d-block">Jornada</label>
+      <div class="form-check form-check-inline">
+        <input type="radio" id="matutina" value="Matutina" formControlName="jornada" class="form-check-input">
+        <label for="matutina" class="form-check-label">Matutina</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" id="vespertina" value="Vespertina" formControlName="jornada" class="form-check-input">
+        <label for="vespertina" class="form-check-label">Vespertina</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input type="radio" id="nocturna" value="Nocturna" formControlName="jornada" class="form-check-input">
+        <label for="nocturna" class="form-check-label">Nocturna</label>
+      </div>
+      <div *ngIf="isInvalidField('jornada')" class="text-danger small">
+        Debe seleccionar una jornada.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
+      <input type="date" id="fechaNacimiento" formControlName="fechaNacimiento" class="form-control">
+      <div *ngIf="isInvalidField('fechaNacimiento')" class="text-danger small">
+        La fecha de nacimiento es obligatoria.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="telefono" class="form-label">Teléfono</label>
+      <input type="text" id="telefono" formControlName="telefono" class="form-control">
+      <div *ngIf="isInvalidField('telefono')" class="text-danger small">
+        El teléfono debe tener exactamente 8 dígitos.
+      </div>
+    </div>
+
+    <div class="mb-3 form-check">
+      <input type="checkbox" id="aceptarReglamento" formControlName="aceptarReglamento" class="form-check-input">
+      <label for="aceptarReglamento" class="form-check-label">Aceptar reglamento</label>
+      <div *ngIf="isInvalidField('aceptarReglamento')" class="text-danger small d-block">
+        Debe aceptar el reglamento para registrarse.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary me-2">
+      {{ estudianteEditar ? 'Actualizar estudiante' : 'Guardar estudiante' }}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="onLimpiar()">Limpiar / Cancelar</button>
+  </form>
+</div>
