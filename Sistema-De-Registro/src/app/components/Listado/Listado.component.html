@@ -1,0 +1,51 @@
+<div class="listado-container">
+  <h3>Listado de Estudiantes</h3>
+
+  <div class="search-box">
+    <input 
+      type="text" 
+      [(ngModel)]="filtroBusqueda" 
+      placeholder="Buscar por nombre o carné..." 
+    />
+    <span class="counter">
+      Total: <strong>{{ estudiantesFiltrados.length }}</strong> de {{ estudiantes.length }}
+    </span>
+  </div>
+
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Carné</th>
+        <th>Nombre Completo</th>
+        <th>Correo</th>
+        <th>Edad</th>
+        <th>Carrera</th>
+        <th>Jornada</th>
+        <th>Teléfono</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let est of estudiantesFiltrados">
+        <td>{{ est.numeroCarne }}</td>
+        <td>{{ est.nombreCompleto }}</td>
+        <td>{{ est.correoElectronico }}</td>
+        <td>{{ est.edad }}</td>
+        <td>{{ est.carrera }}</td>
+        <td>{{ est.jornada }}</td>
+        <td>{{ est.telefono }}</td>
+        <td class="acciones-btns">
+          <button class="btn-edit" (click)="onEditar(est)">Editar</button>
+          <button class="btn-delete" (click)="onEliminar(est.numeroCarne)">Eliminar</button>
+        </td>
+      </tr>
+
+      <tr *ngIf="estudiantes.length === 0">
+        <td colspan="8" class="empty">No hay estudiantes registrados.</td>
+      </tr>
+      <tr *ngIf="estudiantes.length > 0 && estudiantesFiltrados.length === 0">
+        <td colspan="8" class="empty">No se encontraron coincidencias con la búsqueda.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
