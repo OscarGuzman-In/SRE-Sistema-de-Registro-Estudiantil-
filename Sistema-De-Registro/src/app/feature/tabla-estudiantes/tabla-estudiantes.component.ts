@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Estudiante } from '../../models/estudiante.model';
+import { Student } from '../../models/student.model';
 
 @Component({
   selector: 'app-tabla-estudiantes',
@@ -10,17 +10,17 @@ import { Estudiante } from '../../models/estudiante.model';
   styleUrls: ['./tabla-estudiantes.component.scss']
 })
 export class TablaEstudiantesComponent {
-  @Input() estudiantes: Estudiante[] = [];
-  @Output() editar = new EventEmitter<Estudiante>();
-  @Output() eliminar = new EventEmitter<number>();
 
-  onEditar(estudiante: Estudiante): void {
+  @Input() estudiantes: Student[] = [];
+
+  @Output() editar = new EventEmitter<Student>();
+  @Output() eliminar = new EventEmitter<string>();
+
+  onEditar(estudiante: Student): void {
     this.editar.emit(estudiante);
   }
 
-  onEliminar(id?: number): void {
-    if (id !== undefined) {
-      this.eliminar.emit(id);
-    }
+  onEliminar(numeroCarne: string): void {
+    this.eliminar.emit(numeroCarne);
   }
 }

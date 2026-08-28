@@ -1,36 +1,58 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { FormularioComponent } from './feature/formulario/formulario.component';
 import { TablaEstudiantesComponent } from './feature/tabla-estudiantes/tabla-estudiantes.component';
-import { Estudiante } from './models/estudiante.model';
+
+import { Student } from './models/student.model';
+import { StudentService } from './services/student.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormularioComponent, TablaEstudiantesComponent],
+  imports: [
+    CommonModule,
+    FormularioComponent,
+    TablaEstudiantesComponent
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  listaEstudiantes: Estudiante[] = [];
-  estudianteSeleccionado: Estudiante | null = null;
-  private proximoId = 1;
 
-  guardarEstudiante(estudianteData: Estudiante): void {
+  estudianteSeleccionado: Student | null = null;
+
+  constructor(private studentService: StudentService) {}
+
+  get listaEstudiantes(): Student[] {
+    return this.studentService.getStudents();
+  }
+
+  guardarEstudiante(estudiante: Student): void {
+
     if (this.estudianteSeleccionado) {
-      // Editar estudiante existente
-      this.listaEstudiantes = this.listaEstudiantes.map(est =>
-        est.id === this.estudianteSeleccionado?.id ? { ...estudianteData, id: est.id } : est
+
+      const resultado = this.studentService.updateStudent(
+        this.estudianteSeleccionado.numeroCarne,
+        estudiante
       );
-      this.estudianteSeleccionado = null;
+
+      if (resultado) {
+        this.estudianteSeleccionado = null;
+      }
+
     } else {
-      // Crear nuevo estudiante (asignando un nuevo arreglo para que Angular reaccione)
-      const nuevoEstudiante = { ...estudianteData, id: this.proximoId++ };
-      this.listaEstudiantes = [...this.listaEstudiantes, nuevoEstudiante];
+
+      const resultado = this.studentService.addStudent(estudiante);
+
+      if (!resultado) {
+        alert('Ya existe un estudiante con ese número de carné.');
+      }
+
     }
   }
 
-  seleccionarParaEditar(estudiante: Estudiante): void {
+  seleccionarParaEditar(estudiante: Student): void {
     this.estudianteSeleccionado = estudiante;
   }
 
@@ -38,10 +60,13 @@ export class AppComponent {
     this.estudianteSeleccionado = null;
   }
 
-  eliminarEstudiante(id: number): void {
+  eliminarEstudiante(numeroCarne: string): void {
+
     if (confirm('¿Está seguro de eliminar este registro?')) {
-      this.listaEstudiantes = this.listaEstudiantes.filter(est => est.id !== id);
-      if (this.estudianteSeleccionado?.id === id) {
+
+      const eliminado = this.studentService.deleteStudent(numeroCarne);
+
+      if (eliminado && this.estudianteSeleccionado?.numeroCarne === numeroCarne) {
         this.estudianteSeleccionado = null;
       }
     }

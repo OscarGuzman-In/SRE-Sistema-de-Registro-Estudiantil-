@@ -1,12 +1,11 @@
-export interface Estudiante {
-  id?: number;
+export interface Student {
   nombreCompleto: string;
-  carnet: string;
-  correo: string;
+  numeroCarne: string;
+  correoElectronico: string;
   edad: number;
   carrera: string;
   jornada: string;
   fechaNacimiento: string;
   telefono: string;
-  aceptarReglamento: boolean;
+  aceptaReglamento: boolean;
 }

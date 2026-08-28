@@ -20,15 +20,15 @@
       </thead>
       <tbody>
         <tr *ngFor="let est of estudiantes">
-          <td>{{ est.carnet }}</td>
+          <td>{{ est.numeroCarne }}</td>
           <td>{{ est.nombreCompleto }}</td>
-          <td>{{ est.correo }}</td>
+          <td>{{ est.correoElectronico }}</td>
           <td>{{ est.carrera }}</td>
           <td>{{ est.jornada }}</td>
           <td>{{ est.telefono }}</td>
           <td>
             <button class="btn btn-warning btn-sm me-2" (click)="onEditar(est)">Editar</button>
-            <button class="btn btn-danger btn-sm" (click)="onEliminar(est.id)">Eliminar</button>
+            <button class="btn btn-danger btn-sm" (click)="onEliminar(est.numeroCarne)">Eliminar</button>
           </td>
         </tr>
       </tbody>
