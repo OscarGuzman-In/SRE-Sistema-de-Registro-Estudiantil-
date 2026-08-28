@@ -1,3 +1,22 @@
-<div class="container mt-4">
-  <app-formulario></app-formulario>
+<div class="container my-4">
+  <h1 class="text-center mb-4">Sistema de Registro Estudiantil</h1>
+
+  <div class="row">
+    <div class="col-lg-5 mb-4">
+      <app-formulario 
+        [estudianteEditar]="estudianteSeleccionado" 
+        [listaEstudiantes]="listaEstudiantes"
+        (guardarEstudiante)="guardarEstudiante($event)" 
+        (cancelarEdicion)="cancelarEdicion()">
+      </app-formulario>
+    </div>
+
+    <div class="col-lg-7">
+      <app-tabla-estudiantes 
+        [estudiantes]="listaEstudiantes" 
+        (editar)="seleccionarParaEditar($event)"
+        (eliminar)="eliminarEstudiante($event)">
+      </app-tabla-estudiantes>
+    </div>
+  </div>
 </div>
