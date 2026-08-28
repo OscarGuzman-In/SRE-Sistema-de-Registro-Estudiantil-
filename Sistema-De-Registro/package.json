@@ -1,5 +1,6 @@
 {
   "name": "sistema-de-registro",
+developer
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -30,3 +31,26 @@
     "vitest": "^4.0.8"
   }
 }
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^21.2.22",
+    "@angular/cli": "^22.1.6",
+    "@angular/common": "^22.1.4",
+    "@angular/compiler": "^22.1.4",
+    "@angular/core": "^22.1.4",
+    "@angular/forms": "^22.1.4",
+    "@angular/platform-browser": "^22.1.4",
+    "@angular/platform-browser-dynamic": "^20.0.7",
+    "rxjs": "^7.8.2",
+    "zone.js": "^0.16.2"
+  }
+}
+feature/listado
