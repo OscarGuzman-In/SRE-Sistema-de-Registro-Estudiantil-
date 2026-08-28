@@ -1,7 +1,7 @@
 <div class="card p-4 shadow-sm">
   <h2 class="mb-4">Registro de Estudiante</h2>
   <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
-
+ 
     <!-- Nombre completo -->
     <div class="mb-3">
       <label class="form-label font-weight-bold">Nombre completo</label>
@@ -11,38 +11,38 @@
         <span *ngIf="formulario.get('nombreCompleto')?.errors?.['minlength']">El nombre debe tener al menos 5 caracteres.</span>
       </div>
     </div>
-
+ 
     <!-- Carné -->
     <div class="mb-3">
       <label class="form-label">Número de carné</label>
-      <input type="text" class="form-control" formControlName="carnet" placeholder="Ej. 2026001">
-      <div *ngIf="formulario.get('carnet')?.invalid && formulario.get('carnet')?.touched" class="text-danger small mt-1">
-        <span *ngIf="formulario.get('carnet')?.errors?.['required']">El carné es obligatorio.</span>
-        <span *ngIf="formulario.get('carnet')?.errors?.['pattern']">El carné solo debe contener números.</span>
+      <input type="text" class="form-control" formControlName="numeroCarne" placeholder="Ej. 2026001">
+      <div *ngIf="formulario.get('numeroCarne')?.invalid && formulario.get('numeroCarne')?.touched" class="text-danger small mt-1">
+        <span *ngIf="formulario.get('numeroCarne')?.errors?.['required']">El carné es obligatorio.</span>
+        <span *ngIf="formulario.get('numeroCarne')?.errors?.['minlength'] || formulario.get('numeroCarne')?.errors?.['maxlength']">El carné debe tener entre 5 y 10 caracteres.</span>
       </div>
     </div>
-
+ 
     <!-- Correo -->
     <div class="mb-3">
       <label class="form-label">Correo electrónico</label>
-      <input type="email" class="form-control" formControlName="correo" placeholder="estudiante@ejemplo.com">
-      <div *ngIf="formulario.get('correo')?.invalid && formulario.get('correo')?.touched" class="text-danger small mt-1">
-        <span *ngIf="formulario.get('correo')?.errors?.['required']">El correo es obligatorio.</span>
-        <span *ngIf="formulario.get('correo')?.errors?.['email']">Ingrese un correo electrónico válido.</span>
+      <input type="email" class="form-control" formControlName="correoElectronico" placeholder="estudiante@ejemplo.com">
+      <div *ngIf="formulario.get('correoElectronico')?.invalid && formulario.get('correoElectronico')?.touched" class="text-danger small mt-1">
+        <span *ngIf="formulario.get('correoElectronico')?.errors?.['required']">El correo es obligatorio.</span>
+        <span *ngIf="formulario.get('correoElectronico')?.errors?.['email']">Ingrese un correo electrónico válido.</span>
       </div>
     </div>
-
+ 
     <!-- Edad -->
     <div class="mb-3">
       <label class="form-label">Edad</label>
       <input type="number" class="form-control" formControlName="edad" placeholder="Ej. 17">
       <div *ngIf="formulario.get('edad')?.invalid && formulario.get('edad')?.touched" class="text-danger small mt-1">
         <span *ngIf="formulario.get('edad')?.errors?.['required']">La edad es obligatoria.</span>
-        <span *ngIf="formulario.get('edad')?.errors?.['min']">La edad mínima permitida es de 15 años.</span>
-        <span *ngIf="formulario.get('edad')?.errors?.['max']">La edad máxima permitida es de 80 años.</span>
+        <span *ngIf="formulario.get('edad')?.errors?.['min']">La edad mínima permitida es de 14 años.</span>
+        <span *ngIf="formulario.get('edad')?.errors?.['max']">La edad máxima permitida es de 25 años.</span>
       </div>
     </div>
-
+ 
     <!-- Carrera -->
     <div class="mb-3">
       <label class="form-label">Carrera</label>
@@ -54,7 +54,7 @@
         Debe seleccionar una carrera.
       </div>
     </div>
-
+ 
     <!-- Jornada -->
     <div class="mb-3">
       <label class="form-label d-block">Jornada</label>
@@ -74,7 +74,7 @@
         Debe seleccionar una jornada.
       </div>
     </div>
-
+ 
     <!-- Fecha de nacimiento -->
     <div class="mb-3">
       <label class="form-label">Fecha de nacimiento</label>
@@ -83,17 +83,17 @@
         La fecha de nacimiento es obligatoria.
       </div>
     </div>
-
+ 
     <!-- Teléfono -->
     <div class="mb-3">
       <label class="form-label">Teléfono</label>
       <input type="text" class="form-control" formControlName="telefono" placeholder="Ej. 55554444">
       <div *ngIf="formulario.get('telefono')?.invalid && formulario.get('telefono')?.touched" class="text-danger small mt-1">
         <span *ngIf="formulario.get('telefono')?.errors?.['required']">El teléfono es obligatorio.</span>
-        <span *ngIf="formulario.get('telefono')?.errors?.['pattern']">Ingrese un número telefónico válido.</span>
+        <span *ngIf="formulario.get('telefono')?.errors?.['pattern']">Ingrese un número telefónico válido (8 dígitos).</span>
       </div>
     </div>
-
+ 
     <!-- Reglamento -->
     <div class="form-check mb-3">
       <input class="form-check-input" type="checkbox" formControlName="aceptaReglamento" id="reglamento">
@@ -104,7 +104,7 @@
         Debe aceptar el reglamento para continuar.
       </div>
     </div>
-
+ 
     <button type="submit" class="btn btn-primary me-2">Guardar estudiante</button>
     <button type="button" class="btn btn-secondary" (click)="onLimpiar()">Limpiar / Cancelar</button>
   </form>

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormularioComponent } from './formulario.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('FormularioComponent', () => {
   let component: FormularioComponent;
@@ -7,12 +8,12 @@ describe('FormularioComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FormularioComponent],
+      imports: [ReactiveFormsModule, FormularioComponent], // Al ser standalone, se importa en 'imports'
     }).compileComponents();
 
     fixture = TestBed.createComponent(FormularioComponent);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges();
   });
 
   it('should create', () => {
